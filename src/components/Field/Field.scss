@@ -7,20 +7,3 @@
   align-items: center;
   gap: 10px;
 }
-
-.square {
-  padding: 10px;
-  width: 50px;
-  height: 50px;
-  background-color: #61dafb;
-  &:nth-child(-2n + 8),
-  &:nth-child(8) ~ div:nth-child(-2n + 15),
-  &:nth-child(16) ~ div:nth-child(-2n + 24),
-  &:nth-child(24) ~ div:nth-child(-2n + 31),
-  &:nth-child(32) ~ div:nth-child(-2n + 40),
-  &:nth-child(40) ~ div:nth-child(-2n + 47),
-  &:nth-child(48) ~ div:nth-child(-2n + 56),
-  &:nth-child(56) ~ div:nth-child(-2n + 63) {
-    background-color: #20232a;
-  }
-}
