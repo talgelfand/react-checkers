@@ -2,7 +2,7 @@ import React from "react";
 import FirstButton from "./components/buttons/FirstButton/FirstButton";
 import SecondButton from "./components/buttons/SecondButton/SecondButton";
 import Field from "./components/Field";
-import WinScreen from "./components/screens/WinScreen";
+import FailScreen from "./components/screens/FailScreen";
 import Title from "./components/Title";
 
 function App() {
@@ -12,7 +12,7 @@ function App() {
       <FirstButton />
       <Field />
       <SecondButton /> */}
-      <WinScreen />
+      <FailScreen />
     </div>
   );
 }

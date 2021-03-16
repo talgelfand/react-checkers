@@ -1,5 +1,5 @@
 import React from "react";
-import flags from "./flags3.png";
+import flags from "./flags.png";
 import RetryButton from "../../buttons/RetryButton";
 
 import "./WinScreen.scss";
