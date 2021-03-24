@@ -1,5 +1,6 @@
 import React, { useReducer } from "react";
 import FieldCell from "../FieldCell";
+import FiguresArray from "../FiguresArray";
 
 import "./Field.scss";
 
@@ -24,12 +25,21 @@ const Field = () => {
   });
 
   const squares = [];
+  // let fieldCellColor;
 
   for (let i = 0; i < 8; i++) {
     squares.push([]);
     for (let j = 0; j < 8; j++) {
+      // if ((i + j) % 2 === 1) {
+      //   fieldCellColor = "black";
+      // }
       squares[i].push(
-        <FieldCell key={i + "" + j} data={data} dispatch={dispatch} />
+        <FieldCell
+          // className={fieldCellColor}
+          key={i + "" + j}
+          data={data}
+          dispatch={dispatch}
+        />
       );
     }
   }
