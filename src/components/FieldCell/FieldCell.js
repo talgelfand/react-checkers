@@ -1,12 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import WhiteFigure from "./WhiteFigure.png";
 import BlackFigure from "./BlackFigure.png";
 
 import "./FieldCell.scss";
 
-const FieldCell = ({ data, dispatch }) => {
-  const [color, setColor] = useState("white");
-
+const FieldCell = ({ data, dispatch, figure }) => {
   const handleDragEnter = (e) => {
     e.preventDefault();
     e.stopPropagation();
@@ -56,8 +54,8 @@ const FieldCell = ({ data, dispatch }) => {
       onDragEnter={(e) => handleDragEnter(e)}
       onDragLeave={(e) => handleDragLeave(e)}
     >
-      {color ? (
-        "black" ? (
+      {figure ? (
+        figure.color === "black" ? (
           <img draggable src={BlackFigure} alt="black" />
         ) : (
           <img draggable src={WhiteFigure} alt="white" />

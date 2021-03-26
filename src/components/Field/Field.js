@@ -4,6 +4,14 @@ import FiguresArray from "../FiguresArray";
 
 import "./Field.scss";
 
+const getFigure = (x, y) => {
+  for (let i = 0; i < FiguresArray.length; i++) {
+    if (x === FiguresArray[i].positionX && y === FiguresArray[i].positionY) {
+      return FiguresArray[i];
+    }
+  }
+};
+
 const Field = () => {
   const reducer = (state, action) => {
     switch (action.type) {
@@ -25,20 +33,18 @@ const Field = () => {
   });
 
   const squares = [];
-  // let fieldCellColor;
 
   for (let i = 0; i < 8; i++) {
     squares.push([]);
     for (let j = 0; j < 8; j++) {
-      // if ((i + j) % 2 === 1) {
-      //   fieldCellColor = "black";
-      // }
       squares[i].push(
         <FieldCell
-          // className={fieldCellColor}
           key={i + "" + j}
           data={data}
           dispatch={dispatch}
+          // positionX={FiguresArray[i].positionX - 1}
+          // positionY={FiguresArray[j].positionY}
+          figure={getFigure(i, j)}
         />
       );
     }
