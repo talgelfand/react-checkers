@@ -12,6 +12,10 @@ const getFigure = (x, y) => {
   }
 };
 
+const getPositions = (x, y) => {
+  return [x, y];
+};
+
 const Field = () => {
   const reducer = (state, action) => {
     switch (action.type) {
@@ -19,8 +23,8 @@ const Field = () => {
         return { ...state, dropDepth: action.dropDepth };
       case "SET_IN_DROP_ZONE":
         return { ...state, inDropZone: action.inDropZone };
-      case "ADD_FILE_TO_LIST":
-        return { ...state, fileList: state.fileList.concat(action.files) };
+      case "GET_POSITIONS":
+        return { ...state, positions: action.positions };
       default:
         return state;
     }
@@ -29,7 +33,7 @@ const Field = () => {
   const [data, dispatch] = useReducer(reducer, {
     dropDepth: 0,
     inDropZone: false,
-    fileList: [],
+    positions: [],
   });
 
   const squares = [];
@@ -42,9 +46,8 @@ const Field = () => {
           key={i + "" + j}
           data={data}
           dispatch={dispatch}
-          // positionX={FiguresArray[i].positionX - 1}
-          // positionY={FiguresArray[j].positionY}
           figure={getFigure(i, j)}
+          positions={getPositions(i, j)}
         />
       );
     }

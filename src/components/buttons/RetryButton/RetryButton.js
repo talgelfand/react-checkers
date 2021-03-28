@@ -3,12 +3,12 @@ import { Button } from "reactstrap";
 
 import "./RetryButton.scss";
 
-function RetryButton() {
+const RetryButton = () => {
   return (
     <Button className="retry-button" size="lg" color="info">
       Retry
     </Button>
   );
-}
+};
 
 export default RetryButton;

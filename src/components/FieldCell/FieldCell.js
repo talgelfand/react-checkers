@@ -1,10 +1,10 @@
 import React from "react";
-import WhiteFigure from "./WhiteFigure.png";
-import BlackFigure from "./BlackFigure.png";
+import WhiteFigure from "../Figure/WhiteFigure.png";
+import BlackFigure from "../Figure/BlackFigure.png";
 
 import "./FieldCell.scss";
 
-const FieldCell = ({ data, dispatch, figure }) => {
+const FieldCell = ({ data, dispatch, figure, positions }) => {
   const handleDragEnter = (e) => {
     e.preventDefault();
     e.stopPropagation();
@@ -29,7 +29,7 @@ const FieldCell = ({ data, dispatch, figure }) => {
     dispatch({ type: "SET_IN_DROP_ZONE", inDropZone: true });
   };
 
-  const handleDrop = (e) => {
+  const handleDrop = (e, x, y) => {
     e.preventDefault();
     e.stopPropagation();
 
@@ -39,11 +39,12 @@ const FieldCell = ({ data, dispatch, figure }) => {
       const existingFiles = data.fileList.map((f) => f.name);
       files = files.filter((f) => !existingFiles.includes(f.name));
 
-      dispatch({ type: "ADD_FILE_TO_LIST", files });
-      e.dataTransfer.clearData();
       dispatch({ type: "SET_DROP_DEPTH", dropDepth: 0 });
       dispatch({ type: "SET_IN_DROP_ZONE", inDropZone: false });
+      dispatch({ type: "GET_POSITIONS", positions: [x, y] });
     }
+
+    console.log(`Dropped to ${positions}`);
   };
 
   return (
@@ -61,6 +62,9 @@ const FieldCell = ({ data, dispatch, figure }) => {
           <img draggable src={WhiteFigure} alt="white" />
         )
       ) : null}
+      {positions
+        ? (e) => handleDrop(e, figure.positionX, figure.positionY)
+        : null}
     </div>
   );
 };

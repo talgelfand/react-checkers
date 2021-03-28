@@ -4,7 +4,7 @@ import RetryButton from "../../buttons/RetryButton";
 
 import "./FailScreen.scss";
 
-function FailScreen() {
+const FailScreen = () => {
   return (
     <div className="fail-screen">
       <h1 className="fail-screen__title">You lost :(</h1>
@@ -12,6 +12,6 @@ function FailScreen() {
       <RetryButton />
     </div>
   );
-}
+};
 
 export default FailScreen;

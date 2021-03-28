@@ -4,7 +4,7 @@ import RetryButton from "../../buttons/RetryButton";
 
 import "./WinScreen.scss";
 
-function WinScreen() {
+const WinScreen = () => {
   return (
     <div className="win-screen">
       <h1 className="win-screen__title">Congratulations! You won!</h1>
@@ -12,6 +12,6 @@ function WinScreen() {
       <RetryButton />
     </div>
   );
-}
+};
 
 export default WinScreen;

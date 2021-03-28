@@ -4,7 +4,7 @@ import SecondButton from "./components/buttons/SecondButton/SecondButton";
 import Field from "./components/Field";
 import Title from "./components/Title";
 
-function App() {
+const App = () => {
   return (
     <div className="App">
       <Title />
@@ -13,6 +13,6 @@ function App() {
       <FirstButton />
     </div>
   );
-}
+};
 
 export default App;
