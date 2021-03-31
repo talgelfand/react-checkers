@@ -3,8 +3,9 @@ import WhiteFigure from "../Figure/WhiteFigure.png";
 import BlackFigure from "../Figure/BlackFigure.png";
 
 import "./FieldCell.scss";
+import FiguresArray from "../FiguresArray";
 
-const FieldCell = ({ data, dispatch, figure, positions }) => {
+const FieldCell = ({ data, dispatch, figure, positions, getDragFigure }) => {
   const handleDragEnter = (e) => {
     e.preventDefault();
     e.stopPropagation();
@@ -25,26 +26,37 @@ const FieldCell = ({ data, dispatch, figure, positions }) => {
     e.preventDefault();
     e.stopPropagation();
 
-    e.dataTransfer.dropEffect = "copy";
     dispatch({ type: "SET_IN_DROP_ZONE", inDropZone: true });
   };
 
-  const handleDrop = (e, x, y) => {
+  const handleDrop = (e) => {
     e.preventDefault();
     e.stopPropagation();
 
-    let files = [...e.dataTransfer.files];
-
-    if (files && files.length > 0) {
-      const existingFiles = data.fileList.map((f) => f.name);
-      files = files.filter((f) => !existingFiles.includes(f.name));
-
-      dispatch({ type: "SET_DROP_DEPTH", dropDepth: 0 });
-      dispatch({ type: "SET_IN_DROP_ZONE", inDropZone: false });
-      dispatch({ type: "GET_POSITIONS", positions: [x, y] });
-    }
+    dispatch({ type: "SET_DROP_DEPTH", dropDepth: 0 });
+    dispatch({ type: "SET_IN_DROP_ZONE", inDropZone: false });
+    dispatch({ type: "GET_POSITIONS", positions: [positions.x, positions.y] });
 
     console.log(`Dropped to ${positions}`);
+
+    const draggedFigure = getDragFigure();
+
+    FiguresArray.forEach((element) => {
+      if (
+        element.positionX === draggedFigure.positionX &&
+        element.positionY === draggedFigure.positionY
+      ) {
+        element.positionX = positions.x;
+        element.positionY = positions.y;
+      }
+    });
+  };
+
+  const handleDragStart = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    dispatch({ type: "DRAG_FIGURE", figure: figure });
   };
 
   return (
@@ -57,14 +69,17 @@ const FieldCell = ({ data, dispatch, figure, positions }) => {
     >
       {figure ? (
         figure.color === "black" ? (
-          <img draggable src={BlackFigure} alt="black" />
+          <img
+            onDragStart={(e) => handleDragStart(e)}
+            draggable
+            figure={figure}
+            src={BlackFigure}
+            alt="black"
+          />
         ) : (
-          <img draggable src={WhiteFigure} alt="white" />
+          <img draggable figure={figure} src={WhiteFigure} alt="white" />
         )
       ) : null}
-      {positions
-        ? (e) => handleDrop(e, figure.positionX, figure.positionY)
-        : null}
     </div>
   );
 };

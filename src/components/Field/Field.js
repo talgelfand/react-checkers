@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React, { useReducer, useState } from "react";
 import FieldCell from "../FieldCell";
 import FiguresArray from "../FiguresArray";
 
@@ -25,16 +25,24 @@ const Field = () => {
         return { ...state, inDropZone: action.inDropZone };
       case "GET_POSITIONS":
         return { ...state, positions: action.positions };
+      case "DRAG_FIGURE":
+        return { ...state, figure: action.figure };
       default:
         return state;
     }
   };
 
   const [data, dispatch] = useReducer(reducer, {
+    figure: null,
     dropDepth: 0,
     inDropZone: false,
     positions: [],
   });
+
+  const getDragFigure = () => {
+    // return data.figure;
+    return { ...data, figure: data.figure };
+  };
 
   const squares = [];
 
@@ -48,6 +56,7 @@ const Field = () => {
           dispatch={dispatch}
           figure={getFigure(i, j)}
           positions={getPositions(i, j)}
+          getDragFigure={getDragFigure}
         />
       );
     }
